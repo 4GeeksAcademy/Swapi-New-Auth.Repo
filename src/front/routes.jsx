@@ -1,14 +1,22 @@
 // Import necessary components and functions from react-router-dom.
 
 import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
+import Personajes from "./pages/Personajes";
+import Planetas from "./pages/Planetas";
+import Naves from "./pages/Naves";
+import DetallePersonajes from "./components/DetallePersonajes";
+import DetalleNaves from "./components/DetalleNaves";
+import DetallePlanetas from "./components/DetallePlanetas";
+import FavoritosList from "./components/FavoritosList";
+
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,7 +31,14 @@ export const router = createBrowserRouter(
 
         {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
         <Route path= "/" element={<Home />} />
-        <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
+        <Route path="/single/:theId" element={ <Single />} />
+        <Route path="/personajes" element={<Personajes />} />
+        <Route path="/personajes/:uid" element={<DetallePersonajes />} />
+        <Route path="/planetas" element={<Planetas />} />
+        <Route path="/planetas/:uid" element={<DetallePlanetas />} />
+        <Route path="/naves" element={<Naves />} />
+        <Route path="/naves/:uid" element={<DetalleNaves />} />
+        <Route path="/favorites" element={<FavoritosList />} />
         <Route path="/demo" element={<Demo />} />
       </Route>
     )

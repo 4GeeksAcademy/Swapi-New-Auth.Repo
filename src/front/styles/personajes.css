@@ -1,0 +1,64 @@
+.personajes-container {
+    padding: 20px;
+    background-color: #121212;
+    min-height: 100vh;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .personajes-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #FFD700;
+    letter-spacing: 1px;
+  }
+  
+  .personajes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .personaje-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    background: #1e1e1e;
+    transition: all 0.3s ease;
+    border: 1px solid #333;
+  }
+  
+  .personaje-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.1);
+    border-color: #FFD700;
+  }
+  
+  .personaje-image {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .personaje-name {
+    text-align: center;
+    font-weight: bold;
+    color: #FFD700;
+  }
+  
+  .loading-message,
+  .error-message,
+  .empty-message {
+    text-align: center;
+    color: #FFD700;
+    margin-top: 50px;
+    font-size: 1.2rem;
+  }
