@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, unset_jwt_cookies
 from werkzeug.security import generate_password_hash, check_password_hash
 
 api = Blueprint('api', __name__)
@@ -23,9 +23,9 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('signup', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def signup():
-    data = request.json()
+    data = request.get_json()
     email = data.get('email')
     password = data.get('password')
 
@@ -48,7 +48,7 @@ def signup():
 
 @api.route('/login', methods=['POST'])
 def login():
-    data = request.get.json()
+    data = request.get_json()
     if not data:
         return jsonify({"message": "Missing JSON in request"}), 400
     email = data.get('email')
@@ -57,7 +57,7 @@ def login():
     if not email or not password:
         return jsonify({"message": "Email and Password are required."}), 400
     
-    user = User.query.firlter_by(email = email).first()
+    user = User.query.filter_by(email = email).first()
     if not user or not check_password_hash(user.password, password):
         return jsonify({"message": "Wrong credentials"}), 401
     
@@ -65,13 +65,20 @@ def login():
    
     return jsonify({
        "message": "Access Granted",
-       "acess_token": access_token,
+       "access_token": access_token,
        "user_id": user.id
    }), 200
 
 @api.route('/logout', methods=['POST'])
 @jwt_required()
 def logout():
-    respone = jsonify({"message": "Logged out."})
+    response = jsonify({"message": "Logged out."})
     unset_jwt_cookies(response)
     return response, 200
+
+@api.route('/private', methods = ['GET'])
+@jwt_required()
+def private():
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+    return jsonify({"message": "Hello, {user.email} (ID: {user.id})"}), 200
