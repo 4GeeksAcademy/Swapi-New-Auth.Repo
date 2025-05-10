@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/home.css";
 
+
 export const Home = () => {
   return (
     <div className="databank-container">

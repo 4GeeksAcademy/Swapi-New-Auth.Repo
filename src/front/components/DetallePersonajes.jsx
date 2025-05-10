@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { GetPersonajeByUid } from '../../services/fetch.js';
 import useGlobalReducer from '../../front/hooks/useGlobalReducer.jsx';
 import { toggleFavorito } from '../../front/hooks/actions.js';
+import '../styles/detallePersonajes.css';
 
 import luke from '../assets/Personajes/01-Luke.jpg';
 import c3po from '../assets/Personajes/02-C3-PO.jpg';
@@ -97,48 +98,6 @@ function DetallePersonajes() {
         <p><strong>Birth Year:</strong> {characterData.birth_year}</p>
         <p><strong>Gender:</strong> {characterData.gender}</p>
       </div>
-
-      <style jsx>{`
-        .character-detail {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-        .character-image-container {
-          display: flex;
-          justify-content: center;
-          margin: 20px 0;
-        }
-        .character-image {
-          width: 400px;
-          height: 500px;
-          object-fit: cover;
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .back-button {
-          background: #333;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-bottom: 20px;
-        }
-        .favorite-btn {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          margin-left: 10px;
-        }
-        .character-properties {
-          background: #f5f5f5;
-          padding: 20px;
-          border-radius: 8px;
-          margin-top: 20px;
-        }
-      `}</style>
     </div>
   );
 }

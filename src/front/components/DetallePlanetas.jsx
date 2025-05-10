@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { GetPlanetaByUid } from '../../services/fetch.js';
 import useGlobalReducer from '../../front/hooks/useGlobalReducer.jsx';
 import { toggleFavorito } from '../hooks/actions.js';
+import '../styles/detallePlanetas.css';
 
 import tatooine from '../assets/Planetas/01-Tatooine.jpg';
 import alderaan from '../assets/Planetas/02-Alderaan.jpg';
@@ -48,8 +49,8 @@ function DetallePlanetas() {
     if (!planetaDetalle) return <div>No planet data available</div>;
 
     const planetData = planetaDetalle.result?.properties || {};
-    const esFavorito = favoritos.some(fav => 
-        fav.uid === planetaDetalle.uid && 
+    const esFavorito = favoritos.some(fav =>
+        fav.uid === planetaDetalle.uid &&
         fav.type === 'planeta' &&
         fav.name === planetData.name
     );
@@ -70,9 +71,9 @@ function DetallePlanetas() {
             </button>
 
             <div className="planet-image-container">
-                <img 
-                    src={imageSrc} 
-                    alt={planetData.name} 
+                <img
+                    src={imageSrc}
+                    alt={planetData.name}
                     className="planet-image"
                 />
             </div>
@@ -96,48 +97,6 @@ function DetallePlanetas() {
                 <p><strong>Surface Water:</strong> {planetData.surface_water}%</p>
                 <p><strong>Terrain:</strong> {planetData.terrain}</p>
             </div>
-
-            <style jsx>{`
-                .planet-detail {
-                    max-width: 800px;
-                    margin: 0 auto;
-                    padding: 20px;
-                }
-                .planet-image-container {
-                    display: flex;
-                    justify-content: center;
-                    margin: 20px 0;
-                }
-                .planet-image {
-                    width: 500px;
-                    height: 300px;
-                    object-fit: cover;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                }
-                .back-button {
-                    background: #333;
-                    color: white;
-                    border: none;
-                    padding: 8px 16px;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    margin-bottom: 20px;
-                }
-                .favorite-button {
-                    background: none;
-                    border: none;
-                    font-size: 24px;
-                    cursor: pointer;
-                    margin-left: 10px;
-                }
-                .planet-properties {
-                    background: #f5f5f5;
-                    padding: 20px;
-                    border-radius: 8px;
-                    margin-top: 20px;
-                }
-            `}</style>
         </div>
     );
 }

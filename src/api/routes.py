@@ -5,6 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from werkzeug.security import generate_password_hash, check_password_hash
 
 api = Blueprint('api', __name__)
 
@@ -20,3 +22,56 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('signup', methods=['POST'])
+def signup():
+    data = request.json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({"message": "Email and Password are required."}), 400
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return jsonify({"message": "User already exist!"}), 400
+    
+    new_user = User(
+        email = email,
+        password = generate_password_hash(password),
+        is_active = True
+    )
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "You are now a Force User."}), 201
+
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.get.json()
+    if not data:
+        return jsonify({"message": "Missing JSON in request"}), 400
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({"message": "Email and Password are required."}), 400
+    
+    user = User.query.firlter_by(email = email).first()
+    if not user or not check_password_hash(user.password, password):
+        return jsonify({"message": "Wrong credentials"}), 401
+    
+    access_token = create_access_token(identity = user.id)
+   
+    return jsonify({
+       "message": "Access Granted",
+       "acess_token": access_token,
+       "user_id": user.id
+   }), 200
+
+@api.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    respone = jsonify({"message": "Logged out."})
+    unset_jwt_cookies(response)
+    return response, 200

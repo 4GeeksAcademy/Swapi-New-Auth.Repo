@@ -1,0 +1,43 @@
+.main-nav {
+    background-color: #121212;
+    border-bottom: 1px solid #333;
+    padding: 1rem 0;
+    }
+    
+    .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    }
+    
+    .nav-btn-home {
+    color: #FFD700;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    }
+    
+    .nav-actions {
+    display: flex;
+    gap: 1rem;
+    }
+    
+    .nav-button-auth {
+    background-color: #1e1e1e;
+    color: #FFD700;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    }
+    
+    .nav-button:hover {
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }

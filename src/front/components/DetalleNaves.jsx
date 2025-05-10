@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { GetNaveByUid } from '../../services/fetch.js';
 import useGlobalReducer from '../../front/hooks/useGlobalReducer.jsx';
 import { toggleFavorito } from '../hooks/actions.js';
+import '../styles/detalleNaves.css';
 
 import cr90 from '../assets/Naves/01-CR90.jpg';
 import starDestroyer from '../assets/Naves/02-Star Destroyer.jpg';
@@ -91,48 +92,6 @@ function DetalleNaves() {
         <p><strong>MGLT:</strong> {starshipData.MGLT}</p>
         <p><strong>Starship Class:</strong> {starshipData.starship_class}</p>
       </div>
-
-      <style jsx>{`
-        .starship-detail {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-        .starship-image-container {
-          display: flex;
-          justify-content: center;
-          margin: 20px 0;
-        }
-        .starship-image {
-          width: 500px;
-          height: 300px;
-          object-fit: cover;
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .back-button {
-          background: #333;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-bottom: 20px;
-        }
-        .favorite-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          margin-left: 10px;
-        }
-        .starship-properties {
-          background: #f5f5f5;
-          padding: 20px;
-          border-radius: 8px;
-          margin-top: 20px;
-        }
-      `}</style>
     </div>
   );
 }

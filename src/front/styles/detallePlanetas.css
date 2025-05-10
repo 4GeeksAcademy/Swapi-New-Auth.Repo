@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+}
+
+.planet-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #121212;
+    min-height: 100vh;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+}
+
+.planet-image-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.planet-image {
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0,2);
+    border: 1px solid #333;
+}
+
+.back-button {
+    background-color: #1e1e1e;
+    color: #FFD700;
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.3 ease;
+}
+
+.back-button:hover {
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 02);
+}
+
+.planet-detail h1 {
+    color: #FFD700;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #FFD700;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.favorite-button:hover{
+    transform: scale(1.1);
+}
+
+.favorite-button.active {
+    color: #ff0000;
+}
+
+.planet-properties {
+    background-color: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    border: 1px solid #333;
+}
+
+.planet-properties p {
+    margin: 0.5rem 0;
+    line-height: 1.6;   
+}
+
+.planet-properties strong {
+    color: #FFD700;
+}
+
+.loading {
+    text-align: center;
+    color: #FFD700;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+}
+
+.error {
+    text-align: center;
+    color: #ff0000;
+    font-size: 1.2rem;
+}
