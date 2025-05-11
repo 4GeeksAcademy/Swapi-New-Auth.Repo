@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Tab, Tabs, Form, Button } from "react-bootstrap";
+import '../styles/registroUsuarios.css'
 
 
 

@@ -75,10 +75,3 @@ def logout():
     response = jsonify({"message": "Logged out."})
     unset_jwt_cookies(response)
     return response, 200
-
-@api.route('/private', methods = ['GET'])
-@jwt_required()
-def private():
-    current_user_id = get_jwt_identity()
-    user = User.query.get(current_user_id)
-    return jsonify({"message": f"Hello, {user.email} (ID: {user.id})"}), 200
