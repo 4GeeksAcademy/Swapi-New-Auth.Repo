@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import '../styles/navbar.css';
 
-export const Navbar = () => {
+export const Navbar = ({ setShowRegisterModal, isRegistered, updateRegisterStatus}) => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    updateRegisterStatus();
+  };
+
   return (
     <nav className="main-nav">
       <div className="nav-container">
@@ -9,9 +14,18 @@ export const Navbar = () => {
           <span>HOME</span>
         </Link>
         <div className="nav-actions">
-          <Link to="/demo">
-            <button className="nav-button-auth">Login/Register</button>
-          </Link>
+          {isRegistered ? (
+            <button className="nav-register-button" onClick={handleLogout}>
+              Log Out
+            </button>
+          ) : (
+            <button
+            className="nav-register-button"
+            onClick={() => setShowRegisterModal(true)}
+            >
+              Login / Sign Up
+            </button>
+          )}
         </div>
       </div>
     </nav>

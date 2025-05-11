@@ -61,7 +61,7 @@ def login():
     if not user or not check_password_hash(user.password, password):
         return jsonify({"message": "Wrong credentials"}), 401
     
-    access_token = create_access_token(identity = user.id)
+    access_token = create_access_token(identity = str(user.id))
    
     return jsonify({
        "message": "Access Granted",
@@ -81,4 +81,4 @@ def logout():
 def private():
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
-    return jsonify({"message": "Hello, {user.email} (ID: {user.id})"}), 200
+    return jsonify({"message": f"Hello, {user.email} (ID: {user.id})"}), 200
