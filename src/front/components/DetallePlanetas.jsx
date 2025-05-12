@@ -50,17 +50,20 @@ function DetallePlanetas() {
 
     const planetData = planetaDetalle.result?.properties || {};
     const esFavorito = favoritos.some(fav =>
-        fav.uid === planetaDetalle.uid &&
+        String(fav.uid) === String(planetaDetalle.result?.uid) &&
         fav.type === 'planeta' &&
         fav.name === planetData.name
     );
 
     const handleToggleFavorito = () => {
+         const uid = planetaDetalle.result?.uid
+    const safePlanetaData = planetaDetalle.result?.properties || {}
+
         dispatch(toggleFavorito({
-            uid: planetaDetalle.uid,
+            uid,
             type: 'planeta',
-            name: planetData.name,
-            ...planetData
+            name: safePlanetaData.name,
+            ...safePlanetaData
         }));
     };
 

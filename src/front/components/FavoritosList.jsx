@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import '../styles/favoritosList.css'
 
 
 import luke from '../assets/Personajes/01-Luke.jpg';
@@ -81,7 +82,6 @@ const imageMap = {
 function FavoritosList() {
   const { store } = useGlobalReducer();
   const { favoritos } = store;
-  const navigate = useNavigate();
 
   return (
     <div className="favoritos-container">
@@ -91,12 +91,13 @@ function FavoritosList() {
         {favoritos.map(item => {
           const uidString = String(item.uid);
           const imageSrc = imageMap[item.type]?.[uidString];
+
+          console.log("Type:", item.type, "UID", uidString, "Image:", !!imageSrc);
           
           return (
             <div
               key={`${item.type}_${uidString}`}
               className="favorito-card"
-              onClick={() => navigate(`/${item.type}/${uidString}`)}
             >
               <img
                 src={imageSrc} 

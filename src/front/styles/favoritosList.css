@@ -1,0 +1,43 @@
+.favoritos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, mimax(160px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.favoritos-container h2 {
+    color: #FFD700;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+
+.favorito-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    background-color: #333;
+}
+
+.favorito-card h3 {
+    color: #FFD700;
+    margin-top: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.favorito-imagen {
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0,2);
+    border: 1px solid #333;
+}

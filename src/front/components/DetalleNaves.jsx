@@ -50,14 +50,21 @@ function DetalleNaves() {
 
   const starshipData = naveDetalle.result.properties || {};
   
-  const esFavorito = favoritos.some(fav => fav.uid === naveDetalle.uid && fav.type === 'nave' && fav.name === starshipData.name);
+  const esFavorito = favoritos.some(fav => 
+    String(fav.uid) === String(naveDetalle.result?.uid) && 
+    fav.type === 'nave' && 
+    fav.name === starshipData.name
+  );
 
-  const handleToggleFavorito = () => {    
+  const handleToggleFavorito = () => {   
+    const uid = naveDetalle.result?.uid;
+    const safeNaveData = naveDetalle.result?.properties || {};
+
     dispatch(toggleFavorito({
-      uid: naveDetalle.uid,
+      uid,
       type: 'nave',
-      name: starshipData.name,
-      ...starshipData
+      name: safeNaveData.name,
+      ...safeNaveData
     }));
   };
 

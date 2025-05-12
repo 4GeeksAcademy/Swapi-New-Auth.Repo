@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Tab, Tabs, Form, Button } from "react-bootstrap";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import '../styles/registroUsuarios.css'
 
 
@@ -8,13 +9,15 @@ const RegistroUsuarios = ({ registroUsuarios, setRegistroUsuarios, updateRegiste
     const [tabActiva, setTabActiva] = useState("Login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isRegistered, setIsRegistered] = useState(false);
+    const {store, dispatch} = useGlobalReducer();
+    const [isRegistered, setIsRegistered] = useState(!!store.token);
+    
 
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        setIsRegistered(!!token);
-    }, [])
+        //const token = localStorage.getItem("token");
+        setIsRegistered(!!store.auth.token);
+    }, [store.auth.token]);
 
     const handlelogin = async (e) => {
         e.preventDefault();
@@ -33,7 +36,10 @@ const RegistroUsuarios = ({ registroUsuarios, setRegistroUsuarios, updateRegiste
             if (response.ok) {
                 localStorage.setItem('token', data.access_token);
                 localStorage.setItem("user_id", data.user_id);
-                setIsRegistered(true);
+                //setIsRegistered(true);
+                dispatch({type: "SET_TOKEN", payload: data.access_token});
+                dispatch({type: "SET_USER_ID", payload: data.user_id})
+                
                 setRegistroUsuarios(false);
                 if (updateRegisterStatus) updateRegisterStatus();
                 alert("Wellcome Back!");
@@ -83,10 +89,11 @@ const RegistroUsuarios = ({ registroUsuarios, setRegistroUsuarios, updateRegiste
             if (response.ok) {
                 localStorage.removeItem("token");
                 localStorage.removeItem("user_id");
-                setIsRegistered(false);
-                setRegistroUsuarios(false);
+                dispatch({type: "CLEAR_SESSION"});
                 if (updateRegisterStatus) updateRegisterStatus();
-                alert("You are leaving, may the Force be with you...")
+                setRegistroUsuarios(false);
+                setIsRegistered(false);
+                alert("You are leaving, may the Force be with you...");
             } else {
                 throw new Error("Logout Error.");
             }

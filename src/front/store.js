@@ -90,7 +90,18 @@ export default function storeReducer(store, action = {}) {
             id: `${type}_${uid}_${Date.now()}`
           }]
         };
+      };
+
+    case "CLEAR_SESSION":
+      return {
+        ...store,
+        auth: { 
+        token: null,
+        user_id: null,
+        isAdmin: false,
+        username: ''
       }
+    }
 
     default:
       return store;
