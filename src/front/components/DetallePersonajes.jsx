@@ -51,17 +51,20 @@ function DetallePersonajes() {
   const characterData = personajeDetalle.result?.properties || {};
   
   const esFavorito = favoritos.some(fav => 
-    fav.uid === personajeDetalle.uid && 
+    String(fav.uid) === String(personajeDetalle.result?.uid) && 
     fav.type === 'personaje' &&
     fav.name === characterData.name
-  );
+  )
 
   const handleToggleFavorito = () => {
+    const uid = personajeDetalle.result?.uid
+    const safePersonajeData = personajeDetalle.result?.properties || {}
+    
     dispatch(toggleFavorito({
-      uid: personajeDetalle.uid,
+      uid,
       type: 'personaje',
       name: characterData.name,
-      ...characterData
+      ...safePersonajeData
     }));
   };
 
